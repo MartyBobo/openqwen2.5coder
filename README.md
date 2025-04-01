@@ -1,109 +1,95 @@
-# 🐍 OpenQwen2.5Coder - Roguelike Snake Game
+# OpenQwen2.5Coder
 
-A modern roguelike Snake game with class progression and skill development systems, powered by the Qwen 2.5 Coder LLM through Ollama.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![Python](https://img.shields.io/badge/python-3.12-blue)
-![Pygame](https://img.shields.io/badge/pygame-2.5.2-green)
-![License](https://img.shields.io/badge/license-MIT-yellow)
+## 🚀 Overview
 
-## 📋 Overview
+OpenQwen2.5Coder is an open-source project that leverages the Qwen2.5 language model for code generation, completion, and assistance tasks. This repository contains the necessary files and instructions to set up and run the Qwen2.5 LLM using Ollama for coding assistance.
 
-OpenQwen2.5Coder combines the classic Snake game with roguelike elements such as:
+## 🌟 Features
 
-- Character class system with unique abilities
-- Skill progression and talent trees
-- Procedurally generated levels
-- RPG-style attribute development
-- Special abilities and power-ups
-- Enemy encounters and boss battles
+- **Containerized LLM Setup**: Run Qwen2.5 in an isolated Docker container
+- **Code Generation**: Generate code based on natural language descriptions
+- **Code Completion**: Get intelligent code suggestions and completions
+- **Multi-language Support**: Supports all major programming languages
+- **Low Resource Requirements**: Optimized to run on consumer hardware
+- **Custom Prompts**: Create and share prompt templates for specific tasks
 
-The game leverages the Qwen 2.5 Coder LLM for dynamic content generation and game logic enhancement through the Ollama API.
+## 🛠️ Requirements
 
-## 🎮 Gameplay Features
+- Docker or Ollama installed on your system
+- 16GB RAM minimum (32GB recommended)
+- 50GB free disk space
+- NVIDIA GPU with CUDA support (optional, for accelerated inference)
 
-- **Multiple Character Classes**: Choose from Warrior, Mage, Rogue, and more
-- **Skill Trees**: Unlock and upgrade abilities as you progress
-- **Procedural Generation**: Different game maps and challenges every time
-- **Progression System**: Level up your snake and unlock new abilities
-- **Dynamic Difficulty**: Adaptive gameplay that changes based on player skill
-- **Achievement System**: Complete special challenges for rewards
+## 📦 Installation
 
-## 🛠️ Technical Stack
+Please refer to our [COMMANDS.md](COMMANDS.md) file for detailed installation and setup instructions for both Docker and Ollama.
 
-- **Python 3.12+**: Core programming language
-- **Pygame**: Game development library for rendering and input handling
-- **Ollama**: Local LLM serving platform
-- **Qwen 2.5 Coder**: 14B parameter LLM for dynamic game content
-- **Docker**: Containerization for easy deployment
+## ⚙️ Configuration
 
-## 🚀 Installation
+Create a `config.toml` file in your config directory:
 
-### Requirements
+```toml
+[llm]
+model = "qwen2.5"
+api_key = ""  # Leave empty for local deployment
+max_tokens = 4096
+temperature = 0.2
 
-- Python 3.12+
-- Docker (for Ollama deployment)
-- 8GB+ RAM for running the LLM
-- NVIDIA GPU recommended for better performance
-
-### Setup Instructions
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/MartyBobo/openqwen2.5coder.git
-cd openqwen2.5coder
+[server]
+port = 3000
+host = "0.0.0.0"
 ```
 
-2. Set up the Python environment:
+## 🔧 Usage
+
+Once the server is running, you can access the OpenQwen2.5Coder through the API:
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+curl -X POST http://localhost:11434/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"model": "qwen2.5-coder:14b-instruct-q4_K_M", "prompt": "Write a function that sorts an array in JavaScript"}'
 ```
 
-3. Install Ollama and set up the Qwen 2.5 Coder model (see [COMMANDS.md](COMMANDS.md) for detailed instructions)
+## 📚 Examples
 
-4. Start the game:
+### Code Generation
 
-```bash
-python main.py
+```
+Write a Python function to find the longest common subsequence of two strings
 ```
 
-## 🖥️ Docker Support
+### Bug Fixing
 
-The game can be run entirely in Docker for easy deployment. See [COMMANDS.md](COMMANDS.md) for detailed Docker setup instructions.
+```
+Fix this code:
 
-## 🎯 How To Play
+def fibonacci(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n)
+```
 
-1. Select a character class at the start screen
-2. Use arrow keys or WASD to navigate
-3. Collect food to grow and gain experience points
-4. Press space to activate your current ability
-5. Press Tab to open the skill tree menu
-6. Press ESC to pause the game
+### Code Explanation
 
-## ✨ Game Mechanics
+```
+Explain the following code:
 
-### Classes and Skills
-
-Each class has unique starting attributes and skill trees:
-
-- **Warrior**: High health, melee-focused abilities
-  - Skills: Dash, Shield Wall, Berserker Rage
-  
-- **Mage**: Special abilities, ranged attacks
-  - Skills: Fireball, Teleport, Time Slow
-  
-- **Rogue**: Fast movement, stealth mechanics
-  - Skills: Invisibility, Poison, Speed Burst
-
-### Progression
-
-- Gain XP by collecting food and defeating enemies
-- Level up to increase your base attributes
-- Spend skill points to unlock and upgrade abilities
-- Find special items to enhance your snake's capabilities
+const memoize = fn => {
+  const cache = {};
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (!(key in cache)) {
+      cache[key] = fn(...args);
+    }
+    return cache[key];
+  };
+};
+```
 
 ## 🤝 Contributing
 
@@ -119,8 +105,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgements
+## 📞 Contact
 
-- Powered by [Qwen 2.5 Coder](https://github.com/QwenLM/Qwen2) from Alibaba Cloud
-- [Ollama](https://github.com/ollama/ollama) for local LLM deployment
-- [OpenManus](https://github.com/mannaandpoem/OpenManus) for agent framework inspiration
+MartyBobo - [@martybobo](https://github.com/MartyBobo)
+
+Project Link: [https://github.com/MartyBobo/openqwen2.5coder](https://github.com/MartyBobo/openqwen2.5coder)
